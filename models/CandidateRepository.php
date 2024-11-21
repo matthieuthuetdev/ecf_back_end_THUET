@@ -35,12 +35,12 @@ class CandidateRepository
             return "Les deux mot de pase saisit ne sont pas identique.";
         }else{
             $password = password_hash($_password, PASSWORD_ARGON2I);
-            $request = "INSERT INTO 'candidats' (lastname_user,firstname_user, mail_user, pass_user, departement_user, age_user) VALUE (:name, :firstName, :email, :password, :depId, :age)";
+            $request = "INSERT INTO candidats (lastname_user,firstname_user, mail_user, pass_user, departement_user, age_user) VALUE (:name, :firstName, :email, :password, :depId, :age)";
             $rq = $this->connection->prepare($request);
             $rq->bindParam(":name",$_name,PDO::PARAM_STR);
             $rq->bindParam(":firstName",$_firstName,PDO::PARAM_STR);
             $rq->bindParam(":email",$_email,PDO::PARAM_STR);
-            $rq->bindParam(":email",$password ,PDO::PARAM_STR);
+            $rq->bindParam(":password",$password ,PDO::PARAM_STR);
             $rq->bindParam(":age",$_age ,PDO::PARAM_INT);
             $rq->bindParam(":depId",$_depId ,PDO::PARAM_INT);
             $rq->execute();
